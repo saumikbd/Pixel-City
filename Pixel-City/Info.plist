@@ -39,5 +39,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app needs your location to pull Flicr Images</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs your location to pull Flicr Images</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app needs your location to pull Flicr Images</string>
+	<key>NSLocationUsageDescription</key>
+	<string>This app needs your location to pull Flicr Images</string>
 </dict>
 </plist>
