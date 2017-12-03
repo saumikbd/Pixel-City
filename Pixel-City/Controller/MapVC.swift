@@ -22,7 +22,14 @@ class MapVC: UIViewController {
         mapView.delegate = self
         locationManager.delegate = self
         configureLocationServices()
+        addDoubletap()
     
+    }
+    
+    func addDoubletap() {
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(dropPin(sender:)))
+        doubleTap.numberOfTapsRequired = 2
+        mapView.addGestureRecognizer(doubleTap)
     }
     
     @IBAction func centerMapButtonTapped(_ sender: Any) {
@@ -34,6 +41,25 @@ class MapVC: UIViewController {
 }
 
 extension MapVC: MKMapViewDelegate {
+    
+    @objc func dropPin(sender: UITapGestureRecognizer){
+        removePin()
+        let screenCoordinate = sender.location(in: mapView)
+        //print(screenCoordinate)
+        let coordinate = mapView.convert(screenCoordinate, toCoordinateFrom: mapView)
+        //print(coordinate)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        mapView.addAnnotation(annotation)
+    }
+    
+    func removePin() {
+        mapView.removeAnnotations(mapView.annotations)
+        /*for annotation in mapView.annotations {
+            mapView.removeAnnotation(annotation)
+        }*/
+    }
+    
     func centerToLocation() {
         guard let location = locationManager.location?.coordinate else {return}
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius*2, regionRadius*2)
