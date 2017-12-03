@@ -44,17 +44,25 @@ extension MapVC: MKMapViewDelegate {
     
     @objc func dropPin(sender: UITapGestureRecognizer){
         removePin()
-        let screenCoordinate = sender.location(in: mapView)
+        let touchPoint = sender.location(in: mapView)
         //print(screenCoordinate)
-        let coordinate = mapView.convert(screenCoordinate, toCoordinateFrom: mapView)
-        //print(coordinate)
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
+        let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        
+        //The default annotation
+        /*let annotation = MKPointAnnotation()
+        annotation.coordinate = touchCoordinate*/
+        
+        //Custom Annotation
+        let annotation = DroppablePin(coordinate: touchCoordinate, identifier: "droppablePin")
         mapView.addAnnotation(annotation)
+        mapView.setCenter(touchCoordinate, animated: true)  // this seems a better option
+        
+       /* let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius * 2, regionRadius * 2)
+        mapView.setRegion(coordinateRegion, animated: true) */
     }
     
     func removePin() {
-        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeAnnotations(mapView.annotations) // this seems a better option
         /*for annotation in mapView.annotations {
             mapView.removeAnnotation(annotation)
         }*/

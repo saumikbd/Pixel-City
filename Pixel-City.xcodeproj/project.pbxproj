@@ -13,6 +13,7 @@
 		D099658D1FD2E4300008908B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D099658C1FD2E4300008908B /* Assets.xcassets */; };
 		D09965901FD2E4300008908B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D099658E1FD2E4300008908B /* LaunchScreen.storyboard */; };
 		D099659D1FD2E4B50008908B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D099659C1FD2E4B50008908B /* Constants.swift */; };
+		D0D9AE291FD48B4900788AA9 /* DroppablePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D9AE281FD48B4900788AA9 /* DroppablePin.swift */; };
 		F8F3DC1097078C37C21BADBA /* Pods_Pixel_City.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD970D5668A23833EF661C2D /* Pods_Pixel_City.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		D099658F1FD2E4300008908B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D09965911FD2E4300008908B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D099659C1FD2E4B50008908B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D0D9AE281FD48B4900788AA9 /* DroppablePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppablePin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		D09965991FD2E4570008908B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D0D9AE281FD48B4900788AA9 /* DroppablePin.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D09965881FD2E4300008908B /* MapVC.swift in Sources */,
+				D0D9AE291FD48B4900788AA9 /* DroppablePin.swift in Sources */,
 				D09965861FD2E4300008908B /* AppDelegate.swift in Sources */,
 				D099659D1FD2E4B50008908B /* Constants.swift in Sources */,
 			);
