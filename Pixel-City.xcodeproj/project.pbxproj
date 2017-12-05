@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D05EE3D81FD71C6A003B7360 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05EE3D71FD71C6A003B7360 /* PhotoCell.swift */; };
 		D09965861FD2E4300008908B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09965851FD2E4300008908B /* AppDelegate.swift */; };
 		D09965881FD2E4300008908B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09965871FD2E4300008908B /* MapVC.swift */; };
 		D099658B1FD2E4300008908B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D09965891FD2E4300008908B /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 		98CF034838E4C4D8B8B0BF16 /* Pods-Pixel-City.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixel-City.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pixel-City/Pods-Pixel-City.debug.xcconfig"; sourceTree = "<group>"; };
 		A97B71FD0DC0045F98227293 /* Pods-Pixel-City.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pixel-City.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pixel-City/Pods-Pixel-City.release.xcconfig"; sourceTree = "<group>"; };
 		BD970D5668A23833EF661C2D /* Pods_Pixel_City.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pixel_City.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D05EE3D71FD71C6A003B7360 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		D09965821FD2E4300008908B /* Pixel-City.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pixel-City.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D09965851FD2E4300008908B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D09965871FD2E4300008908B /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				D0D9AE281FD48B4900788AA9 /* DroppablePin.swift */,
+				D05EE3D71FD71C6A003B7360 /* PhotoCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D09965881FD2E4300008908B /* MapVC.swift in Sources */,
+				D05EE3D81FD71C6A003B7360 /* PhotoCell.swift in Sources */,
 				D0D9AE291FD48B4900788AA9 /* DroppablePin.swift in Sources */,
 				D09965861FD2E4300008908B /* AppDelegate.swift in Sources */,
 				D099659D1FD2E4B50008908B /* Constants.swift in Sources */,
