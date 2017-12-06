@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Avenir.ttc">
+            <string>Avenir-Book</string>
+        </array>
         <array key="AvenirNext.ttc">
             <string>AvenirNext-Bold</string>
         </array>
@@ -84,6 +87,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+        <!--PopVC-->
+        <scene sceneID="dj3-Ov-hyL">
+            <objects>
+                <viewController storyboardIdentifier="PopVC" id="ZdZ-ae-5G3" customClass="PopVC" customModule="Pixel_City" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TDB-Mz-ECP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ujR-RP-iNH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PA2-ps-NYg">
+                                <rect key="frame" x="87" y="597" width="200" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double-Tap to Dismiss" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gp7-Zg-ohl">
+                                        <rect key="frame" x="14.5" y="14" width="171" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Gp7-Zg-ohl" firstAttribute="centerX" secondItem="PA2-ps-NYg" secondAttribute="centerX" id="PEp-Cz-Yj4"/>
+                                    <constraint firstItem="Gp7-Zg-ohl" firstAttribute="centerY" secondItem="PA2-ps-NYg" secondAttribute="centerY" id="bU3-Mx-Xpq"/>
+                                    <constraint firstAttribute="height" constant="50" id="lRs-F6-1Kj"/>
+                                    <constraint firstAttribute="width" constant="200" id="s91-Yj-RQX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WjK-69-XnU" firstAttribute="bottom" secondItem="PA2-ps-NYg" secondAttribute="bottom" constant="20" id="BTI-zQ-4pc"/>
+                            <constraint firstItem="ujR-RP-iNH" firstAttribute="trailing" secondItem="WjK-69-XnU" secondAttribute="trailing" id="NH1-2S-kEb"/>
+                            <constraint firstItem="PA2-ps-NYg" firstAttribute="centerX" secondItem="TDB-Mz-ECP" secondAttribute="centerX" id="PWV-lX-7nZ"/>
+                            <constraint firstItem="ujR-RP-iNH" firstAttribute="top" secondItem="TDB-Mz-ECP" secondAttribute="top" id="XHZ-xK-j2F"/>
+                            <constraint firstItem="ujR-RP-iNH" firstAttribute="leading" secondItem="WjK-69-XnU" secondAttribute="leading" id="inT-xa-Qze"/>
+                            <constraint firstItem="ujR-RP-iNH" firstAttribute="bottom" secondItem="WjK-69-XnU" secondAttribute="bottom" id="zv9-J3-APV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WjK-69-XnU"/>
+                    </view>
+                    <connections>
+                        <outlet property="photoView" destination="ujR-RP-iNH" id="9fF-2e-hAC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IyC-lK-tkh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="863.20000000000005" y="133.5832083958021"/>
         </scene>
     </scenes>
     <resources>

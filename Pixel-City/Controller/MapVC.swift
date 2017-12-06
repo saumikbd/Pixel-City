@@ -144,7 +144,7 @@ class MapVC: UIViewController {
                     self.photoArray.append(photo)
                     
                     self.progressLabel?.text = "Completed Loading \(self.photoArray.count)/\(self.photoUrls.count) Photos\n"
-                    print("Completed Loading \(self.photoArray.count)/\(self.photoUrls.count) Photos\n")
+                    print("Completed Loading \(self.photoArray.count)/\(self.photoUrls.count) Photos\n\(self.photoUrls[self.photoArray.count-1])")
                     if self.photoArray.count == self.photoUrls.count {
                         completion(true)
                     }
@@ -272,6 +272,13 @@ extension MapVC:UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopVC else{return}
+        popVC.initData(image: photoArray[indexPath.row])
+        present(popVC, animated: true, completion: nil)
+        
     }
     
     
