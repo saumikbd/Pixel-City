@@ -38,8 +38,8 @@ class MapVC: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         mapView.delegate = self
         locationManager.delegate = self
-        
         setupPhotoCollectionView()
+        registerForPreviewing(with: self, sourceView: photoCollection!)
         configureLocationServices()
         centerToLocation()
         addDoubletap()
@@ -279,6 +279,23 @@ extension MapVC:UICollectionViewDelegate, UICollectionViewDataSource {
         popVC.initData(image: photoArray[indexPath.row])
         present(popVC, animated: true, completion: nil)
         
+    }
+    
+    
+}
+
+extension MapVC: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = photoCollection?.indexPathForItem(at: location), let cell = photoCollection?.cellForItem(at: indexPath) else {return nil}
+        
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopVC else{return nil}
+        popVC.initData(image: photoArray[indexPath.row])
+        previewingContext.sourceRect = cell.contentView.frame
+        return popVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
     }
     
     
