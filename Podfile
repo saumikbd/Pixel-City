@@ -6,6 +6,8 @@ target 'Pixel-City' do
   use_frameworks!
 
   # Pods for Pixel-City
-pod 'Alamofire', '~> 4.5'
-pod 'AlamofireImage', '~> 3.3'
+pod 'Alamofire'
+pod 'AlamofireImage'
+pod 'SwiftyJSON'
+
 end

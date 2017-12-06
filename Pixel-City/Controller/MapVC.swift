@@ -9,6 +9,9 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Alamofire
+import AlamofireImage
+import SwiftyJSON
 
 class MapVC: UIViewController {
 
@@ -26,6 +29,10 @@ class MapVC: UIViewController {
     
     var authorizationStatus = CLLocationManager.authorizationStatus()
     let regionRadius:Double = 1000
+    
+    var photoUrls = [String]()
+    var photoArray = [UIImage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -43,7 +50,7 @@ class MapVC: UIViewController {
         photoCollection?.register(PhotoCell.self, forCellWithReuseIdentifier: "PhotoCell")
         photoCollection?.delegate = self
         photoCollection?.dataSource = self
-        photoCollection?.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        photoCollection?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         pullUpView.addSubview(photoCollection!)
     }
     
@@ -85,7 +92,7 @@ class MapVC: UIViewController {
         progressLabel = UILabel()
         progressLabel?.frame = CGRect(x: view.frame.size.width/2 - labelWidth/2, y: pullUpView.frame.size.height/2 + 25.0, width: labelWidth, height: 40)
         progressLabel?.font = UIFont(name: "Avenir-Book", size: 15)
-        progressLabel?.text = "Completed Loading 15/20 Photos"
+        progressLabel?.text = ""
         progressLabel?.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         progressLabel?.textAlignment = .center
         photoCollection?.addSubview(progressLabel!)
@@ -109,10 +116,53 @@ class MapVC: UIViewController {
         }
     }
     
+    func retriveUrls(url: String, completion: @escaping CompletionHandler){
+        self.photoUrls = []
+        Alamofire.request(url).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                guard let photos = json["photos"]["photo"].array else {return}
+                for photo in photos {
+                    let photoUrl = "https://farm\(photo["farm"].stringValue).staticflickr.com/\(photo["server"].stringValue)/\(photo["id"].stringValue)_\(photo["secret"].stringValue)_h.jpg"
+                    self.photoUrls.append(photoUrl)
+                }
+                //print(self.photoUrls)
+                completion(true)
+            }else {
+                debugPrint(response.result.error as Any)
+                completion(false)
+            }
+        }
+    }
+    
+    func retrivePhotos( completion: @escaping CompletionHandler) {
+        self.photoArray = []
+        for url in photoUrls {
+            Alamofire.request(url).responseImage(completionHandler: { (response) in
+                if response.result.error == nil {
+                    guard let photo = response.result.value else {return}
+                    self.photoArray.append(photo)
+                    
+                    self.progressLabel?.text = "Completed Loading \(self.photoArray.count)/\(self.photoUrls.count) Photos\n"
+                    print("Completed Loading \(self.photoArray.count)/\(self.photoUrls.count) Photos\n")
+                    if self.photoArray.count == self.photoUrls.count {
+                        self.progressLabel?.isHidden = true
+                        self.spinner?.stopAnimating()
+                        self.spinner?.isHidden = true
+                        completion(true)
+                    }
+                } else{
+                    debugPrint(response.result.error as Any)
+                    completion(false)
+                }
+            })
+        }
+    }
+    
+    
+    
 }
-
-
-
 
 
 
@@ -147,6 +197,16 @@ extension MapVC: MKMapViewDelegate {
         
        /* let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius * 2, regionRadius * 2)
         mapView.setRegion(coordinateRegion, animated: true) */
+        let url = getApiUrl(apiKey: API_KEY, annotation: annotation, perPage: 40)
+        self.retriveUrls(url: url) { (success) in
+            if success{
+                self.retrivePhotos(completion: { (success) in
+                    if success {
+                        print("retriving photos successful")
+                    }
+                })
+            }
+        }
         animatePullUpViewUp()
         addSwipeDown()
         addSpinner()
@@ -192,7 +252,7 @@ extension MapVC:UICollectionViewDelegate, UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return self.photoUrls.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
