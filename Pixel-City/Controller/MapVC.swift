@@ -66,6 +66,7 @@ class MapVC: UIViewController {
     }
     
     @objc func swipeDownPullUpView(){
+        cancelAllSessions()
         pullUpViewHeightConstraint.constant = 0
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
@@ -160,6 +161,12 @@ class MapVC: UIViewController {
         }
     }
     
+    func cancelAllSessions() {
+        Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionData, uploadData, downloadData) in
+            sessionData.forEach({ $0.cancel() })
+            downloadData.forEach({ $0.cancel() })
+        }
+    }
     
     
 }
@@ -182,6 +189,8 @@ extension MapVC: MKMapViewDelegate {
         removePin()
         removeSpinner()
         removeProgressLabel()
+        cancelAllSessions()
+        
         let touchPoint = sender.location(in: mapView)
         //print(screenCoordinate)
         let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
