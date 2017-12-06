@@ -118,7 +118,6 @@ class MapVC: UIViewController {
     }
     
     func retriveUrls(url: String, completion: @escaping CompletionHandler){
-        self.photoUrls = []
         Alamofire.request(url).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.data else {return}
@@ -138,7 +137,6 @@ class MapVC: UIViewController {
     }
     
     func retrivePhotos( completion: @escaping CompletionHandler) {
-        self.photoArray = []
         for url in photoUrls {
             Alamofire.request(url).responseImage(completionHandler: { (response) in
                 if response.result.error == nil {
@@ -148,9 +146,6 @@ class MapVC: UIViewController {
                     self.progressLabel?.text = "Completed Loading \(self.photoArray.count)/\(self.photoUrls.count) Photos\n"
                     print("Completed Loading \(self.photoArray.count)/\(self.photoUrls.count) Photos\n")
                     if self.photoArray.count == self.photoUrls.count {
-                        self.progressLabel?.isHidden = true
-                        self.spinner?.stopAnimating()
-                        self.spinner?.isHidden = true
                         completion(true)
                     }
                 } else{
@@ -190,6 +185,9 @@ extension MapVC: MKMapViewDelegate {
         removeSpinner()
         removeProgressLabel()
         cancelAllSessions()
+        photoArray = []
+        photoUrls = []
+        photoCollection?.reloadData()
         
         let touchPoint = sender.location(in: mapView)
         //print(screenCoordinate)
@@ -212,6 +210,9 @@ extension MapVC: MKMapViewDelegate {
                 self.retrivePhotos(completion: { (success) in
                     if success {
                         print("retriving photos successful")
+                        self.removeProgressLabel()
+                        self.removeSpinner()
+                        self.photoCollection?.reloadData()
                     }
                 })
             }
@@ -266,6 +267,8 @@ extension MapVC:UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as? PhotoCell {
+            let imageView = UIImageView(image: photoArray[indexPath.row])
+            cell.addSubview(imageView)
             return cell
         }
         return UICollectionViewCell()
